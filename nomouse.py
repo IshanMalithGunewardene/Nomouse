@@ -19,7 +19,7 @@ from PyQt5.QtCore import Qt, QTimer, QPoint
 from PyQt5.QtGui import QPainter, QFont, QColor, QPen, QKeyEvent
 import keyboard
 import pyautogui
-from pynput import keyboard as pynput_keyboard
+from pynput.keyboard import Key, Listener
 
 
 class GridOverlay(QWidget):
@@ -96,7 +96,7 @@ class GridOverlay(QWidget):
     
     def _setup_keyboard_listener(self):
         """Setup keyboard listener for input when overlay is active"""
-        self.listener = pynput_keyboard.Listener(
+        self.listener = Listener(
             on_press=self._on_key_press,
             on_release=self._on_key_release
         )
@@ -117,9 +117,9 @@ class GridOverlay(QWidget):
                     
         except AttributeError:
             # Special keys
-            if key == pynput_keyboard.Key.escape:
+            if key == Key.esc:
                 self.close()
-            elif key == pynput_keyboard.Key.backspace:
+            elif key == Key.backspace:
                 self.current_input = self.current_input[:-1] if self.current_input else ""
                 self.update()
     
@@ -228,4 +228,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main() 
+    main()

@@ -14,23 +14,35 @@ A Python application that provides a transparent overlay grid for quick mouse po
 ## Installation
 
 ### Option 1: Manual Installation
-1. **Install Python dependencies:**
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/nomouse.git
+   cd nomouse
+   ```
+
+2. **Install Python dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
 
-2. **Run the application (requires sudo):**
+3. **Run the application (requires sudo):**
    ```bash
    sudo python3 nomouse.py
    ```
 
 ### Option 2: Automatic Service Installation (Recommended)
-1. **Run the setup script:**
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/nomouse.git
+   cd nomouse
+   ```
+
+2. **Run the setup script:**
    ```bash
    sudo ./setup_service.sh
    ```
 
-2. **The app will start automatically on boot and run in the background.**
+3. **The app will start automatically on boot and run in the background.**
 
 **Note:** The service installation is recommended as it handles root privileges automatically and starts the app on boot.
 

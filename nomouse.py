@@ -91,7 +91,7 @@ class GridOverlay(QWidget):
         self.cell_centers = {}
         for code, (row, col) in self.codes.items():
             center_x = col * self.cell_width + self.cell_width // 2
-            center_y = row * self.cell_height + self.cell_height // 2
+            center_y = row * self.cell_height + self.cell_height // 2 + 15
             self.cell_centers[code] = (center_x, center_y)
     
     def _setup_keyboard_listener(self):
@@ -132,7 +132,7 @@ class GridOverlay(QWidget):
         if code in self.codes:
             center_x, center_y = self.cell_centers[code]
             click_x = center_x
-            click_y = center_y + 18
+            click_y = center_y
             
             print(f"Processing code: {code}")
             print(f"Target coordinates: ({click_x}, {click_y})")
@@ -184,7 +184,7 @@ class GridOverlay(QWidget):
             # Draw the two-letter code
             text_rect = painter.fontMetrics().boundingRect(code)
             text_x = center_x - text_rect.width() // 2
-            text_y = center_y + text_rect.height() // 2
+            text_y = center_y - text_rect.height() // 2
             painter.drawText(text_x, text_y, code)
         
         # Draw current input if any

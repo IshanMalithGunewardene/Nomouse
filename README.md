@@ -6,7 +6,7 @@ A Python application that provides a transparent overlay grid for quick mouse po
 
 - **Global Hotkey**: Press `Ctrl+;` to show the overlay
 - **Transparent Overlay**: Always-on-top window covering the entire screen
-- **Grid System**: 10x10 grid of two-letter codes (AA, AB, AC, ..., TM)
+- **Grid System**: 32x32 grid of two-letter codes (AA, AB, AC, ..., ZM)
 - **Quick Navigation**: Type any two-letter code to move mouse to that cell
 - **Input Blocking**: Overlay blocks mouse/keyboard input to underlying applications
 - **Easy Exit**: Press `Escape` to close the overlay

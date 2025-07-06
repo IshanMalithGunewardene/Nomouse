@@ -25,9 +25,9 @@ from pynput.keyboard import Key, Listener
 class GridOverlay(QWidget):
     """Transparent overlay window that displays a grid of two-letter codes"""
     
-    def __init__(self, grid_size: int = 10):
+    def __init__(self, grid_size: int = 32):
         super().__init__()
-        self.grid_size = grid_size
+        self.grid_size = 26  # Always use 32x32 grid
         self.codes = self._generate_codes()
         self.cell_size = None
         self.cell_centers = {}
@@ -130,12 +130,14 @@ class GridOverlay(QWidget):
     def _process_code(self, code: str):
         """Process a two-letter code and move mouse if valid"""
         if code in self.codes:
-            # Move mouse to the center of the cell
             center_x, center_y = self.cell_centers[code]
-            pyautogui.moveTo(center_x, center_y)
+            # Click even lower to match the text visually
+            click_x = center_x
+            click_y = center_y + 18  # Increased offset for lower click
+            pyautogui.moveTo(click_x, click_y)
+            pyautogui.click(click_x, click_y)
             self.close()
         else:
-            # Invalid code, clear input
             self.current_input = ""
             self.update()
     

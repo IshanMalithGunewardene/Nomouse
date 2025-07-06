@@ -3,7 +3,7 @@
 # Nomouse Installation Script
 echo "Installing Nomouse - Transparent Grid Overlay"
 
-# Check if Python 3 is installed
+# Check if Python 3 is installede
 if ! command -v python3 &> /dev/null; then
     echo "Error: Python 3 is not installed. Please install Python 3 first."
     exit 1
@@ -22,7 +22,8 @@ if [ $? -eq 0 ]; then
     echo "Installation completed successfully!"
     echo ""
     echo "To run the application:"
-    echo "  python3 nomouse.py"
+    echo "  xhost +SI:localuser:root"
+    echo "  sudo python3 nomouse.py"
     echo ""
     echo "Usage:"
     echo "  - Press Ctrl+; to show the overlay"

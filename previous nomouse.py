@@ -25,9 +25,9 @@ from pynput.keyboard import Key, Listener
 class GridOverlay(QWidget):
     """Transparent overlay window that displays a grid of two-letter codes"""
     
-    def __init__(self, grid_size: int = 26):
+    def __init__(self, grid_size: int = 32):
         super().__init__()
-        self.grid_size = grid_size
+        self.grid_size = 26  # Always use 32x32 grid
         self.codes = self._generate_codes()
         self.cell_size = None
         self.cell_centers = {}
@@ -131,31 +131,13 @@ class GridOverlay(QWidget):
         """Process a two-letter code and move mouse if valid"""
         if code in self.codes:
             center_x, center_y = self.cell_centers[code]
+            # Click even lower to match the text visually
             click_x = center_x
-            click_y = center_y + 18
-            
-            print(f"Processing code: {code}")
-            print(f"Target coordinates: ({click_x}, {click_y})")
-            
-            # Close overlay first
+            click_y = center_y + 18  # Increased offset for lower click
+            pyautogui.moveTo(click_x, click_y)
+            pyautogui.click(click_x, click_y)
             self.close()
-            import time
-            time.sleep(0.2)
-            
-            # Use xdotool for clicking
-            import os
-            cmd = f"sudo -u ishan xdotool mousemove {click_x} {click_y} click 1"
-            print(f"Running command: {cmd}")
-            
-            result = os.system(cmd)
-            print(f"Command result: {result}")
-            
-            if result == 0:
-                print("Click command executed successfully")
-            else:
-                print("Click command failed")
         else:
-            print(f"Invalid code: {code}")
             self.current_input = ""
             self.update()
     
@@ -216,7 +198,7 @@ class NomouseApp:
     def __init__(self):
         self.app = QApplication(sys.argv)
         self.overlay = None
-        self.grid_size = 26
+        self.grid_size = 10  # Default 10x10 grid
         
         # Setup global hotkey
         keyboard.add_hotkey('ctrl+;', self._show_overlay)
@@ -228,7 +210,7 @@ class NomouseApp:
         """Show the grid overlay"""
         if self.overlay is None or not self.overlay.isVisible():
             self.overlay = GridOverlay(self.grid_size)
-            self.overlay.showFullScreen()
+            self.overlay.show()
             self.overlay.raise_()
             self.overlay.activateWindow()
     
